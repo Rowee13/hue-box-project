@@ -7,7 +7,6 @@ import "./App.css";
 
 class App extends Component {
 	render() {
-		console.log(generatePalette(SeedColors[4]));
 		return (
 			<div>
 				<Palette palette={generatePalette(SeedColors[4])} />
