@@ -7,6 +7,23 @@ import { generatePalette } from "./helpers/colorHeloer";
 import "./App.css";
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { palettes: SeedColors };
+		this.findPalette = this.findPalette.bind(this);
+		this.paletteRoute = this.paletteRoute.bind(this);
+	}
+
+	findPalette(id) {
+		return this.state.palettes.find(function (palette) {
+			return palette.id === id;
+		});
+	}
+
+	paletteRoute(routeProps) {
+		return generatePalette(this.findPalette(routeProps.match.params.id));
+	}
+
 	render() {
 		return (
 			<BrowserRouter>
@@ -21,7 +38,7 @@ class App extends Component {
 					<Route
 						exact
 						path="/palette/:id"
-						element={<h1>INDIVIDUAL PALETTE</h1>}
+						element={<Palette palette={this.paletteRoute()} />}
 					/>
 				</Routes>
 			</BrowserRouter>
