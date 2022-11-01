@@ -1,6 +1,7 @@
 import { Component } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, useParams } from "react-router-dom";
 
+import PaletteList from "./components/PaletteList";
 import Palette from "./components/Palette";
 import SeedColors from "./SeedColors";
 import { generatePalette } from "./helpers/colorHeloer";
@@ -20,8 +21,9 @@ class App extends Component {
 		});
 	}
 
-	paletteRoute(routeProps) {
-		return generatePalette(this.findPalette(routeProps.match.params.id));
+	paletteRoute() {
+		const { id } = useParams;
+		return generatePalette(this.findPalette(id));
 	}
 
 	render() {
@@ -31,9 +33,7 @@ class App extends Component {
 					<Route
 						exact
 						path="/"
-						element={
-							<Palette palette={generatePalette(SeedColors[4])} />
-						}
+						element={<PaletteList palettes={SeedColors} />}
 					/>
 					<Route
 						exact
